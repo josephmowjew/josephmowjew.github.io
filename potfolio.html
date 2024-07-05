@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph Mojoo - Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a192f;
+            --text-color: #8892b0;
+            --highlight-color: #64ffda;
+            --heading-color: #ccd6f6;
+            --card-bg-color: rgba(255, 255, 255, 0);
+            --border-color: rgba(255, 255, 255, 0.15);
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: rgba(10, 25, 47, 0.85);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            display: flex;
+            justify-content: flex-start; /* Changed from flex-end to flex-start */
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            padding-right: 2rem; /* Add padding to the right to create a gap */
+        }
+        nav ul li {
+            margin-left: 2rem;
+        }
+        nav ul li a {
+            color: var(--heading-color);
+            text-decoration: none;
+            font-weight: 500; /* Increased font weight */
+            font-size: 1.2rem; /* Increased font size */
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--highlight-color);
+            border-bottom: 2px solid var(--highlight-color);
+        }
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+        h1, h2, h3 {
+            color: var(--heading-color);
+            font-family: 'Poppins', sans-serif; /* Use Poppins for headings */
+            font-weight: 600;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-top: 2rem;
+        }
+        section {
+            margin-bottom: 4rem;
+            padding-top: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 0;
+        }
+        .skills li {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: var(--highlight-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+        }
+        .profile-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-right: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23), 0 0 0 10px rgba(100, 255, 218, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            object-fit: cover;
+        }
+        .profile-image:hover {
+            transform: translateY(-10px) rotateY(10deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22), 0 0 0 15px rgba(100, 255, 218, 0.2);
+        }
+        .projects-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        .project-card, .contact-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card::before, .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .project-card:hover, .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 40px rgba(0, 0, 0, 0.2);
+        }
+        .project-card:hover::before, .contact-card:hover::before {
+            opacity: 1;
+        }
+        .project-card h3, .contact-card h3 {
+            margin-top: 0;
+        }
+        @keyframes fadeInBorder {
+            from { border-color: rgba(255, 255, 255, 0); }
+            to { border-color: rgba(255, 255, 255, 0.3); }
+        }
+        .project-card.visible, .contact-card.visible {
+            animation: fadeInBorder 1s ease forwards;
+        }
+        .contact-card form {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-card label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .contact-card input,
+        .contact-card textarea {
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        .contact-card input[type="submit"] {
+            background: var(--highlight-color);
+            color: #0a192f;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .contact-card input[type="submit"]:hover {
+            background: #52e0c4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="profile-container">
+            <img src="joseph.jpg" style="object-fit: cover" alt="Joseph Mojoo" class="profile-image">
+            <div>
+                <h1>Joseph Mojoo</h1>
+                <h2>Software Engineer</h2>
+                <p>I build innovative and dynamic digital experiences.</p>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>About</h2>
+            <p>Innovative and driven software engineer with extensive experience in dynamic website development and comprehensive project management. Proficient in multiple programming languages, including Java, C#, JavaScript, and PHP. Known for delivering high-quality solutions that exceed expectations and drive business success. Passionate about creating impactful software that enhances user experience and operational efficiency.</p>
+        </section>
+
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="job">
+                <h3>System Engineer | Software and Database</h3>
+                <p>Sparc Systems Limited, Blantyre | Feb 2020 - Present</p>
+                <ul>
+                    <li>Developed a multi-tenant cloud-based Student Academic Records Information System (SARIS) for universities, improving data management efficiency by 40%.</li>
+                    <li>Designed and developed the award-winning Mental Lab mobile application, providing mental health support and resources.</li>
+                    <li>Integrated Visa and Mastercard payment options into the Sparc Systems website, enhancing the company's e-commerce capabilities.</li>
+                    <li>Led the development of Sparc HR, a comprehensive HR management system for managing employees, training, leave, fleet, loans, and reports.</li>
+                </ul>
+                <ul class="skills">
+                    <li>Java</li>
+                    <li>C#</li>
+                    <li>JavaScript</li>
+                    <li>PHP</li>
+                    <li>Database Management</li>
+                </ul>
+            </div>
+            <div class="job">
+                <h3>Systems Administrator</h3>
+                <p>Cabletech, Blantyre | Oct 2019 - Jan 2020</p>
+                <ul>
+                    <li>Led the design and development of the company website, significantly improving the company's online presence.</li>
+                    <li>Completed Huawei routing and switching training, enhancing network management skills.</li>
+                </ul>
+                <ul class="skills">
+                    <li>Web Development</li>
+                    <li>Network Management</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <h3>Mental Lab</h3>
+                    <p>A mobile application developed in collaboration with NGO, Caring Hands, providing mental health awareness through articles, videos, and quizzes. Users can access moderated group chats and book one-on-one sessions with therapists.</p>
+                    <ul class="skills">
+                        <li>Android</li>
+                        <li>iOS</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h3>Sparc HR</h3>
+                    <p>A comprehensive HR management system for managing employees, training, leave, fleet, loans, and reports.</p>
+                    <ul class="skills">
+                        <li>Web Development</li>
+                        <li>Database Management</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h3>SARIS</h3>
+                    <p>Student Academic Records Information System - A multi-tenant cloud-based system for universities, improving data management efficiency.</p>
+                    <ul class="skills">
+                        <li>Cloud Computing</li>
+                        <li>Database Design</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <div class="contact-card">
+                <h3>Get in Touch</h3>
+                <form action="https://formspree.io/f/{YOUR_FORM_ID}" method="POST">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                    
+                    <input type="submit" value="Send Message">
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Joseph Mojoo. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll('nav ul li a');
+        const sections = document.querySelectorAll('section');
+        const projectCards = document.querySelectorAll('.project-card');
+        const contactCard = document.querySelector('.contact-card');
+
+        function setActiveLink() {
+            let index = sections.length;
+
+            while (--index && window.scrollY + 50 < sections[index].offsetTop) {}
+
+            navLinks.forEach((link) => link.classList.remove('active'));
+            if (index >= 0 && index < navLinks.length) {
+                navLinks[index].classList.add('active');
+            }
+        }
+
+        function showSection(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (entry.target.id === 'projects') {
+                        projectCards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('visible');
+                            }, index * 200);
+                        });
+                    } else if (entry.target.id === 'contact') {
+                        contactCard.classList.add('visible');
+                    }
+                }
+            });
+        }
+
+        const sectionObserver = new IntersectionObserver(showSection, {
+            root: null,
+            threshold: 0.1,
+        });
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        setActiveLink();
+        window.addEventListener('scroll', setActiveLink);
+
+        navLinks.forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - 80;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
