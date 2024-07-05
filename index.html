@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joseph Mojoo - Software Engineer</title>
+    <title>Joseph Mojoo - Innovative Software Engineer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,8 +11,8 @@
             --text-color: #8892b0;
             --highlight-color: #64ffda;
             --heading-color: #ccd6f6;
-            --card-bg-color: rgba(255, 255, 255, 0.02);
-            --border-color: rgba(255, 255, 255, 0.15);
+            --card-bg-color: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
             --gradient-bg: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
         }
         body {
@@ -25,24 +25,25 @@
             overflow-x: hidden;
         }
         header {
-            background-color: rgba(10, 25, 47, 0.85);
+            background-color: rgba(10, 25, 47, 0.95);
             padding: 1rem 2rem;
             position: fixed;
             width: 100%;
             top: 0;
+            left: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background-color 0.3s ease;
         }
         nav ul {
             display: flex;
-            justify-content: flex-start;
+            justify-content: flex-end;
             list-style: none;
             margin: 0;
             padding: 0;
-            padding-right: 2rem;
         }
         nav ul li {
             margin-left: 2rem;
@@ -51,19 +52,22 @@
             color: var(--heading-color);
             text-decoration: none;
             font-weight: 500;
-            font-size: 1.2rem;
-            transition: color 0.3s ease;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
             padding: 0.5rem 1rem;
+            border-radius: 5px;
         }
         nav ul li a:hover,
         nav ul li a.active {
             color: var(--highlight-color);
-            border-bottom: 2px solid var(--highlight-color);
+            background-color: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
         }
         .hamburger {
             display: none;
             flex-direction: column;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
         .hamburger span {
             height: 3px;
@@ -71,17 +75,117 @@
             background: var(--heading-color);
             margin-bottom: 4px;
             border-radius: 5px;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
-        .nav-menu {
-            display: flex;
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
         }
-        .nav-menu.active {
-            display: block;
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
         }
         main {
             max-width: 1200px;
             margin: 0 auto;
             padding: 6rem 2rem 2rem;
+        }
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            position: relative;
+        }
+        #hero {
+            background: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.7)), url('https://source.unsplash.com/random/1920x1080?technology') no-repeat center center/cover;
+            color: var(--heading-color);
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            border: 4px solid transparent;
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.54);
+            animation: rotateBorder 10s linear infinite, flickerShadow 1s infinite;
+        }
+        @keyframes rotateBorder {
+            0% {
+                border-color: transparent;
+            }
+            25% {
+                border-color: rgba(100, 255, 218, 0.54);
+            }
+            50% {
+                border-color: rgba(100, 255, 218, 0.8);
+            }
+            75% {
+                border-color: rgba(100, 255, 218, 0.54);
+            }
+            100% {
+                border-color: transparent;
+            }
+        }
+        @keyframes flickerShadow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(100, 255, 218, 0.54);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(100, 255, 218, 0.8);
+            }
+        }
+        #hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+        #hero h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--highlight-color);
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+        #hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease-out 1.5s both;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--highlight-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 2s both;
+        }
+        .cta-button:hover {
+            background-color: #52e0c4;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(82, 224, 196, 0.4);
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         h1, h2, h3 {
             color: var(--heading-color);
@@ -131,31 +235,6 @@
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
         }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(10, 25, 47, 0.85);
-            color: var(--text-color);
-            font-size: 0.9rem;
-        }
-        .profile-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-        .profile-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin-right: 2rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23), 0 0 0 10px rgba(100, 255, 218, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            object-fit: cover;
-        }
-        .profile-image:hover {
-            transform: translateY(-10px) rotateY(10deg);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22), 0 0 0 15px rgba(100, 255, 218, 0.2);
-        }
         .projects-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -198,13 +277,6 @@
         .project-card h3, .contact-card h3 {
             margin-top: 0;
         }
-        @keyframes fadeInBorder {
-            from { border-color: rgba(255, 255, 255, 0); }
-            to { border-color: rgba(255, 255, 255, 0.3); }
-        }
-        .project-card.visible, .contact-card.visible {
-            animation: fadeInBorder 1s ease forwards;
-        }
         .contact-card form {
             display: flex;
             flex-direction: column;
@@ -233,89 +305,82 @@
         .contact-card input[type="submit"]:hover {
             background: #52e0c4;
         }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(10, 25, 47, 0.85);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
             }
-            .nav-menu {
+            nav ul {
                 display: none;
                 flex-direction: column;
-                width: 100%;
-            }
-            .nav-menu.active {
-                display: flex;
                 position: absolute;
                 top: 70px;
                 left: 0;
-                background: rgba(10, 25, 47, 0.95);
-                padding: 1rem;
+                width: 100%;
+                background-color: rgba(10, 25, 47, 0.95);
+                padding: 1rem 0;
+                transition: display 0.3s ease;
             }
-            nav ul {
-                flex-direction: column;
-                align-items: flex-start;
-                padding-left: 1rem;
+            nav ul.show {
+                display: flex;
             }
             nav ul li {
-                margin-left: 0;
-                margin-bottom: 1rem;
-            }
-            nav ul li a {
-                font-size: 1rem;
-                padding: 0.5rem;
-            }
-            main {
-                padding: 4rem 1rem 2rem;
-            }
-            .profile-container {
-                flex-direction: column;
-                align-items: center;
+                margin: 0;
                 text-align: center;
             }
-            .profile-image {
-                margin-right: 0;
-                margin-bottom: 1rem;
+            nav ul li a {
+                display: block;
+                padding: 1rem;
             }
-            h1 {
-                font-size: 2.5rem;
+            #hero h1 {
+                font-size: 3rem;
             }
-            h2 {
+            #hero h2 {
                 font-size: 1.5rem;
+            }
+            .profile-image {
+                width: 150px;
+                height: 150px;
             }
             .projects-container {
                 grid-template-columns: 1fr;
             }
         }
-        @media (max-width: 480px) {
-            header {
-                padding: 0.5rem;
-            }
-            nav ul {
-                padding-left: 0.5rem;
-            }
-            nav ul li {
-                margin-bottom: 0.5rem;
-            }
-            main {
-                padding: 3rem 0.5rem 2rem;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-            h2 {
-                font-size: 1.2rem;
-            }
+        .ray {
+            position: fixed;
+            left: 50%;
+            height: 2px;
+            background: var(--highlight-color);
+            opacity: 0;
+            transform: translateX(-50%);
+            transition: transform 1.5s ease, opacity 1.5s ease;
+            z-index: -1;
+        }
+        /* Fade-in effect for the contact section */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
     <header>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <nav>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-menu">
+            <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
@@ -325,12 +390,13 @@
     </header>
 
     <main>
-        <section id="hero" class="profile-container">
-            <img src="joseph.jpg" style="object-fit: cover" alt="Joseph Mojoo" class="profile-image">
-            <div>
+        <section id="hero" class="parallax">
+            <div class="hero-content">
+                <img src="joseph.jpg" alt="Joseph Mojoo" style="object-fit:cover;" class="profile-image">
                 <h1>Joseph Mojoo</h1>
-                <h2>Software Engineer</h2>
-                <p>I build innovative and dynamic digital experiences.</p>
+                <h2>Innovative Software Engineer</h2>
+                <p>Crafting cutting-edge digital experiences that push the boundaries of what's possible.</p>
+                <a href="#contact" class="cta-button">Get in Touch</a>
             </div>
         </section>
 
@@ -388,7 +454,8 @@
                     <p>A comprehensive HR management system for managing employees, training, leave, fleet, loans, and reports.</p>
                     <ul class="skills">
                         <li>Web Development</li>
-                        <li>Database Management</li>
+                        <li>Cloud Computing</li>
+                        <li>Database Design</li>
                     </ul>
                 </div>
                 <div class="project-card">
@@ -402,11 +469,11 @@
             </div>
         </section>
 
-        <section id="contact">
+        <section id="contact" class="fade-in">
             <h2>Contact Me</h2>
             <div class="contact-card">
                 <h3>Get in Touch</h3>
-                <form action="https://formspree.io/f/{YOUR_FORM_ID}" method="POST">
+                <form action="https://formspree.io/f/mojoojoseph@gmail.com" method="POST">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" required>
                     
@@ -426,18 +493,27 @@
         <p>© 2024 Joseph Mojoo. All rights reserved.</p>
     </footer>
 
+    <!-- Shooting Rays -->
+    <div class="rays-container"></div>
+
     <script>
         const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
+        const navMenu = document.querySelector('nav ul');
         const navLinks = document.querySelectorAll('nav ul li a');
         const sections = document.querySelectorAll('section');
         const projectCards = document.querySelectorAll('.project-card');
         const contactCard = document.querySelector('.contact-card');
+        const raysContainer = document.querySelector('.rays-container');
+        const contactSection = document.querySelector('#contact');
+        const ctaButton = document.querySelector('.cta-button');
 
+        // Hamburger menu toggle
         hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+            navMenu.classList.toggle('show');
+            hamburger.classList.toggle('active');
         });
 
+        // Set active link based on scroll position
         function setActiveLink() {
             let index = sections.length;
 
@@ -449,6 +525,7 @@
             }
         }
 
+        // Show sections on scroll
         function showSection(entries, observer) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -489,6 +566,66 @@
                     top: targetPosition,
                     behavior: 'smooth'
                 });
+
+                // Close mobile menu after clicking a link
+                navMenu.classList.remove('show');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Shooting Rays Effect
+        let raysTimeout;
+        function createRay() {
+            const ray = document.createElement('div');
+            ray.classList.add('ray');
+            ray.style.top = `${Math.random() * window.innerHeight}px`;
+            ray.style.left = `${Math.random() * window.innerWidth}px`;
+            ray.style.width = `${Math.random() * 5 + 2}px`;
+            ray.style.height = `${Math.random() * 100 + 50}px`;
+            ray.style.backgroundColor = `var(--highlight-color)`;
+            raysContainer.appendChild(ray);
+
+            setTimeout(() => {
+                ray.style.transform = `translate(-50%, -${Math.random() * 100 + 50}vh)`;
+                ray.style.opacity = '1';
+
+                setTimeout(() => {
+                    ray.style.opacity = '0';
+                    setTimeout(() => {
+                        ray.remove();
+                    }, 1500);
+                }, 1500);
+            }, 100);
+        }
+
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const scrollSpeed = Math.abs(currentScrollY - lastScrollY);
+            lastScrollY = currentScrollY;
+
+            if (scrollSpeed > 5) {
+                createRay();
+                clearTimeout(raysTimeout);
+                raysTimeout = setTimeout(() => {
+                    document.querySelectorAll('.ray').forEach(ray => {
+                        ray.style.opacity = '0';
+                        setTimeout(() => {
+                            ray.remove();
+                        }, 1500);
+                    });
+                }, 500);
+            }
+        });
+
+        // Fade-in transition when the "Get in Touch" button is clicked
+        ctaButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            contactSection.classList.add('visible');
+            const targetPosition = contactSection.getBoundingClientRect().top + window.pageYOffset - 80;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
         });
     </script>
