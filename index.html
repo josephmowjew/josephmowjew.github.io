@@ -498,6 +498,54 @@
         .project-card:hover .project-link {
             border-color: var(--highlight-color);
         }
+
+        .project-card {
+            position: relative;
+            min-height: 350px;
+            overflow: hidden;
+        }
+
+        .project-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 0;
+        }
+
+        .project-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            opacity: 0.85;
+        }
+
+        .project-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-preview {
+            opacity: 1;
+        }
+
+        .project-card:hover .project-content {
+            transform: translateY(5px);
+        }
     </style>
 </head>
 <body>
@@ -573,16 +621,49 @@
             <h2>Projects</h2>
             <div class="projects-container">
                 <div class="project-card">
-                    <h3>MJ's Restaurant Website</h3>
-                    <p>Led the development of a modern, full-featured restaurant website with online ordering capabilities, table reservations, and menu management system. Implemented secure payment processing and real-time order tracking.</p>
-                    <a href="https://www.mjsrestaurant.mw" target="_blank" class="project-link">Visit Site</a>
-                    <ul class="skills">
-                        <li>PHP 8</li>
-                        <li>MySQL</li>
-                        <li>JavaScript</li>
-                        <li>Responsive Design</li>
-                        <li>Payment Integration</li>
-                    </ul>
+                    <div class="project-preview" style="background-image: url('https://api.microlink.io?url=https://www.mjsrestaurant.mw&screenshot=true&meta=false&embed=screenshot.url');"></div>
+                    <div class="project-content">
+                        <h3>MJ's Restaurant Website</h3>
+                        <p>Led the development of a modern, full-featured restaurant website with online ordering capabilities, table reservations, and menu management system. Implemented secure payment processing and real-time order tracking.</p>
+                        <a href="https://www.mjsrestaurant.mw" target="_blank" class="project-link">Visit Site</a>
+                        <ul class="skills">
+                            <li>PHP 8</li>
+                            <li>MySQL</li>
+                            <li>JavaScript</li>
+                            <li>Responsive Design</li>
+                            <li>Payment Integration</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-preview" style="background-image: url('https://api.microlink.io?url=https://hr.sparcsystems.africa&screenshot=true&meta=false&embed=screenshot.url');"></div>
+                    <div class="project-content">
+                        <h3>Sparc HR</h3>
+                        <p>A comprehensive HR management system that streamlines employee management, training programs, leave tracking, fleet management, loan processing, and automated reporting. The system features real-time analytics and customizable workflows for HR processes.</p>
+                        <a href="https://hr.sparcsystems.africa" target="_blank" class="project-link">Visit Site</a>
+                        <ul class="skills">
+                            <li>Web Development</li>
+                            <li>Cloud Computing</li>
+                            <li>Database Design</li>
+                            <li>PHP</li>
+                            <li>JavaScript</li>
+                            <li>REST API</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-preview" style="background-image: url('https://api.microlink.io?url=https://www.district30.africa&screenshot=true&meta=false&embed=screenshot.url');"></div>
+                    <div class="project-content">
+                        <h3>District 30 Africa</h3>
+                        <p>Built a cybersecurity platform for District 30 Africa with threat intelligence, incident tracking and client training features.</p>
+                        <a href="https://www.district30.africa" target="_blank" class="project-link">Visit Site</a>
+                        <ul class="skills">
+                            <li>PHP 8</li>
+                            <li>MySQL</li>
+                            <li>JavaScript</li>
+                            <li>Responsive Design</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="project-card">
                     <h3>Mental Lab</h3>
@@ -597,35 +678,11 @@
                     </ul>
                 </div>
                 <div class="project-card">
-                    <h3>Sparc HR</h3>
-                    <p>A comprehensive HR management system that streamlines employee management, training programs, leave tracking, fleet management, loan processing, and automated reporting. The system features real-time analytics and customizable workflows for HR processes.</p>
-                    <a href="https://hr.sparcsystems.africa" target="_blank" class="project-link">Visit Site</a>
-                    <ul class="skills">
-                        <li>Web Development</li>
-                        <li>Cloud Computing</li>
-                        <li>Database Design</li>
-                        <li>PHP</li>
-                        <li>JavaScript</li>
-                        <li>REST API</li>
-                    </ul>
-                </div>
-                <div class="project-card">
                     <h3>SARIS</h3>
                     <p>Student Academic Records Information System - A multi-tenant cloud-based system for universities, improving data management efficiency.</p>
                     <ul class="skills">
                         <li>Cloud Computing</li>
                         <li>Database Design</li>
-                    </ul>
-                </div>
-                <div class="project-card">
-                    <h3>District 30 Africa</h3>
-                    <p>Built a cybersecurity platform for District 30 Africa with threat intelligence, incident tracking and client training features.</p>
-                    <a href="https://www.district30.africa" target="_blank" class="project-link">Visit Site</a>
-                    <ul class="skills">
-                        <li>PHP 8</li>
-                        <li>MySQL</li>
-                        <li>JavaScript</li>
-                        <li>Responsive Design</li>
                     </ul>
                 </div>
             </div>
