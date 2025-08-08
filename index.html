@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Dark theme (default) */
             --bg-color: #0a192f;
             --text-color: #8892b0;
             --highlight-color: #64ffda;
@@ -15,6 +16,24 @@
             --border-color: rgba(255, 255, 255, 0.1);
             --gradient-bg: linear-gradient(135deg, #0a192f 0%, #112240 100%);
             --glass-bg: rgba(10, 25, 47, 0.8);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --input-border: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] {
+            /* Light theme */
+            --bg-color: #ffffff;
+            --text-color: #4a5568;
+            --highlight-color: #3182ce;
+            --heading-color: #1a202c;
+            --card-bg-color: rgba(255, 255, 255, 0.9);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --gradient-bg: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --input-bg: rgba(0, 0, 0, 0.02);
+            --input-border: rgba(0, 0, 0, 0.15);
         }
         body {
             font-family: 'Roboto', sans-serif;
@@ -36,11 +55,18 @@
             top: 0;
             left: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 10px var(--shadow-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: background-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
         nav ul {
             display: flex;
@@ -120,13 +146,25 @@
             position: relative;
         }
         #hero {
-            background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), 
-                        url('https://source.unsplash.com/random/1920x1080?technology') no-repeat center center/cover;
+            background: var(--gradient-bg);
             color: var(--heading-color);
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            position: relative;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://source.unsplash.com/random/1920x1080?technology') no-repeat center center/cover;
+            opacity: 0.1;
+            z-index: -1;
         }
         .hero-content {
             display: flex;
@@ -307,19 +345,18 @@
             padding: 0.75rem;
             margin-bottom: 1rem;
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--input-border);
+            background: var(--input-bg);
             color: var(--text-color);
             font-size: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
         .contact-card input:focus,
         .contact-card textarea:focus {
             border-color: var(--highlight-color);
-            background: rgba(255, 255, 255, 0.08);
+            background: var(--card-bg-color);
             outline: none;
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
         }
         .contact-card input[type="submit"] {
             background: transparent;
@@ -336,9 +373,44 @@
         footer {
             text-align: center;
             padding: 2rem;
-            background: rgba(10, 25, 47, 0.85);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: var(--text-color);
             font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .theme-toggle {
+            background: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            font-size: 1.5rem;
+            margin-left: 1rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--highlight-color);
+            color: var(--bg-color);
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        .theme-toggle .theme-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover .theme-icon {
+            transform: rotate(180deg);
         }
         @media (max-width: 768px) {
             .hamburger {
@@ -351,9 +423,18 @@
                 top: 70px;
                 left: 0;
                 width: 100%;
-                background-color: rgba(10, 25, 47, 0.95);
+                background-color: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
                 padding: 1rem 0;
                 transition: display 0.3s ease;
+                border-top: 1px solid var(--border-color);
+            }
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                margin-left: 0.5rem;
             }
             nav ul.show {
                 display: flex;
@@ -565,6 +646,9 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <span class="theme-icon">🌙</span>
+        </button>
     </header>
 
     <main>
@@ -730,6 +814,33 @@
         const raysContainer = document.querySelector('.rays-container');
         const contactSection = document.querySelector('#contact');
         const ctaButton = document.querySelector('.cta-button');
+        const themeToggle = document.querySelector('#theme-toggle');
+        const themeIcon = document.querySelector('.theme-icon');
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
+            
+            // Save theme preference
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme or default to dark
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
+        }
+
+        // Initialize theme on page load
+        loadTheme();
+
+        // Theme toggle event listener
+        themeToggle.addEventListener('click', toggleTheme);
 
         // Hamburger menu toggle
         hamburger.addEventListener('click', () => {
